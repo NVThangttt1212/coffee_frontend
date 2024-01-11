@@ -1,0 +1,11 @@
+<app-share-manage
+  [order]="true"
+  [columns]="column"
+  [rowData]="dataOrders"
+  [loading]="loading"
+  [noData]="noData"
+  (clearValueSearch)="clearValueSearch()"
+  (searchValue)="onSearch($event)"
+  (updateRow)="updateRow($event)"
+
+></app-share-manage>

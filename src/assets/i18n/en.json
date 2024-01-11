@@ -1,5 +1,62 @@
 {
-  "test": "Graduation thesis",
+  "global": {
+    "nodata": "No Data",
+    "totals": "Totals",
+    "all": "All",
+    "Selected": "Selected",
+    "search": "Search",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "apply": "Apply",
+    "lang": "EN",
+    "idUser" : "User ID: ",
+    "email" : "Email",
+    "position": "Position",
+    "login": "Log In",
+    "logout": "Sign Out",
+    "username": "User Name",
+    "password": "Pass Word",
+    "vldusername": "Please enter account !",
+    "vldpassword": "Please enter a password !"
+  },
+  "manage": {
+    "totalRevenue": "Total Revenue",
+    "addAccount": "Add Account",
+    "placeholderCoffee": "Search ID Coffee, Name Coffee",
+    "placeholderCake": "Search ID Cake, Name Cake ",
+    "placeholderOrder": "Search ID Order, ID table",
+    "placeholderSnacks": "Search ID Snacks , Name Snacks",
+    "placeholderRevenue": "Search ID Order, ID table",
+    "placeholderAccount": "Search ID Account, Name Account",
+    "action": "Action",
+    "coffee": "coffee",
+    "snacks": "snacks",
+    "order": "order",
+    "cake": "cake",
+    "revenue": "revenue",
+    "product": "product",
+    "account": "account",
+    "orders": {
+      "totals": "Amount",
+      "edit": "Edit",
+      "changeStatus": "Change Status",
+      "actionCancel": "Cancel Orders",
+      "cancel": "Cancel",
+      "deleteOrders": "Delete Orders",
+      "id": "ID Orders",
+      "table": "table",
+      "products": "products",
+      "orderTime": "Time order",
+      "status": "confirm",
+      "delete": "Delete",
+      "paid": "Paid",
+      "unpaid": "UnPaid"
+
+    },
+    "revenues": {
+      "customer_name": "Customer Name"
+    }
+  },
   "header": {
 
   },

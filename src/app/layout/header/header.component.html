@@ -1,1 +1,8 @@
-<p>header works!</p>
+<header style="display: flex">
+  <button (click)="changeLang('vi')">Tiếng Việt</button>
+  <button (click)="changeLang('en');">Tiếng Anh</button>
+  <button routerLink="/menu">menu</button>
+  <button routerLink="/">home</button>
+  <button routerLink="/manage" style="background-color: aqua; color: black"> đăng nhập</button>
+</header>
+

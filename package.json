@@ -10,6 +10,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-material-components/datetime-picker": "^16.0.1",
     "@angular/animations": "^17.0.0",
     "@angular/cdk": "^17.0.1",
     "@angular/common": "^17.0.0",
@@ -22,6 +23,9 @@
     "@angular/router": "^17.0.0",
     "@ngx-translate/core": "^15.0.0",
     "@ngx-translate/http-loader": "^8.0.0",
+    "bootstrap": "^5.3.2",
+    "cors": "^2.8.5",
+    "date-fns": "^3.0.6",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.2"

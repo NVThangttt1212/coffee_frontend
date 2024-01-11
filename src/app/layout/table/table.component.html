@@ -1,0 +1,88 @@
+<div class="container">
+  <section style="display: flex;height: 50px; border-radius: 12px;margin-bottom: 10px;padding: 0 20px; justify-content: space-between; background-color:#fff; align-items: center;">
+    <div class="note__details">
+      <span style="font-weight: bold; color: #007bff;">{{'global.totals' | translate}}: {{totals}}</span>
+      <span style="font-weight: bold; color: #007bff;">{{'global.Selected'| translate}}: {{selectedAll ? ('global.all'| translate): totalSelect}}</span>
+      <span style="font-weight: bold; color: #931a0e" *ngIf="revenue"> Tổng Doanh Thu: <span style="font-size: 16px ">{{totalRevenue | currency: 'VND'}}</span> </span>
+    </div>
+
+
+    <div style="display: flex; align-items: center">
+      <button *ngIf="selectedItems.length >= 1" class="action" mat-button [matMenuTriggerFor]="menu">{{'manage.action' | translate}}</button>
+      <mat-menu #menu="matMenu" class="menuAction">
+        <button *ngIf="localStorage.getItem('position') === 'manager'" mat-menu-item (click)="deleteCol()">{{'manage.orders.delete'| translate}}</button>
+        <button *ngIf="order" mat-menu-item (click)="changStatus()">{{'manage.orders.changeStatus'| translate}}</button>
+      </mat-menu>
+      <button (click)="refresh()" mat-button style="float: right; background-color: #d7d7db;"><i class="fas fa-sync-alt"></i></button>
+      <nav style="margin-left: 20px">
+        <ul style="margin: 0" class="pagination">
+          <li class="page-item" (click)="prevPage()" [class.disabled]="currentPage === 1">
+            <button class="page-link" aria-label="Previous">
+              <span aria-hidden="true"><i class="fas fa-caret-left"></i></span>
+            </button>
+          </li>
+          <li class="page-item active">
+            <button class="page-link">{{ currentPage }}</button>
+          </li>
+          <li class="page-item" (click)="nextPage()" [class.disabled]="currentPage === totalPages">
+            <button class="page-link" aria-label="Next">
+              <span aria-hidden="true"><i class="fas fa-caret-right"></i></span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </section>
+<table class="table" *ngIf="rowData && rowData.length > 0">
+    <thead>
+    <tr>
+      <th style="padding: 0 0 4px 0"><mat-checkbox  [(ngModel)]="selectedAll" (change)="selectAll()"></mat-checkbox></th>
+      <th>{{'manage.orders.id'| translate}}</th>
+      <th>{{'manage.orders.table'| translate}}</th>
+      <th>{{'manage.orders.orderTime'| translate}}</th>
+      <th *ngIf="revenue">{{'manage.revenues.customer_name' | translate }}</th>
+      <th>{{'manage.orders.products'| translate}}</th>
+      <th>{{'manage.orders.totals' | translate}}</th>
+      <th *ngIf="order">{{'manage.orders.status'| translate}}</th>
+      <th>{{'manage.action'| translate}}</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let col of paginatedItems" [class.selected]="isItemSelected(col)">
+      <td style="width: 20px">
+        <input type="checkbox" (change)="selectItem($event, col)" [checked]="isSelected(col)">
+      </td>
+      <td style="width: 128px">{{ col?.order_id }}</td>
+      <td style="width: 20px">{{ col?.table_number }}</td>
+      <td>{{ col?.date_order }}</td>
+      <td *ngIf="revenue">{{ col?.customer_name === "" ? 'N/A' : col?.customer_name}}</td>
+      <td>{{ col?.product_name }}</td>
+      <td>{{ col?.total_amount | currency: 'VND' }}</td>
+      <td *ngIf="order" [ngStyle]="{'color': (col.is_paid === '1') ? '#28a745' : col.is_paid === '0' ? '#dc3545': col.is_paid === '2' ? '#422d22' : '' }">
+        {{ col.is_paid === "1" ? ('manage.orders.paid' | translate) : col.is_paid === "0" ? ('manage.orders.unpaid' | translate) : col.is_paid === "2" ? ('manage.orders.cancelOrder' | translate) : '' }}
+      </td>
+
+      <td class="actionTable">
+        <button [ngStyle]="{'margin-left': revenue ? '36px' : ''}" *ngIf="localStorage.getItem('position') === 'manager'" class="delete" (click)="delete(col)">
+          <i class="fas fa-trash-alt"></i>
+        </button>
+
+        <button *ngIf="order" class="delete" (click)="detail(col)">
+          <i class="far fa-eye"></i>
+        </button>
+
+        <button *ngIf="order" class="delete" (click)="changStatusTable(col)">
+          <i class="far fa-edit"></i>
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <section class="loading" *ngIf="loading" style="margin-top: 18%">
+    <mat-spinner></mat-spinner>
+  </section>
+  <section class="noData" *ngIf="noData">
+    <img src="assets/img/no-data.svg" alt="nodata">
+    <h2>{{'global.nodata'| translate}}</h2>
+  </section>
+</div>

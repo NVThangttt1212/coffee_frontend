@@ -1,0 +1,9 @@
+<app-share-manage
+  [snacks]="true"
+  [columns]="column"
+  [rowData]="dataSnacks"
+  [loading]="loading"
+  [noData]="noData"
+  (searchValue)="onSearch($event)"
+  (updateRow)="updateRow($event)"
+></app-share-manage>

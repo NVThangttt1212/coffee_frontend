@@ -1,19 +1,24 @@
-import { NgModule } from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import {AppRoutingModule} from "./app-routing.module";
-import {LayoutModule} from "./layout/layout.module";
+
 import {HttpClient, HttpClientModule} from "@angular/common/http";
-import {EntitiesModule} from "./entities/entities.module";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {ShareService} from "./share/share.service";
-import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
+import {TranslateLoader, TranslateModule, TranslateService} from "@ngx-translate/core";
 import {BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FormsModule } from '@angular/forms';
+import {LayoutModule} from "./layout/layout.module";
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
+
+export function appInitializerFactory(translate: TranslateService) {
+  return () => {
+  };
 }
 @NgModule({
   declarations: [
@@ -24,7 +29,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     BrowserModule,
     HttpClientModule,
     TranslateModule.forRoot({
-      defaultLanguage: 'vi',
+      defaultLanguage: localStorage.getItem('lang') === 'en' ? 'en': 'vi',
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
@@ -32,12 +37,19 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
       }
     }),
     AppRoutingModule,
-    LayoutModule,
-    EntitiesModule,
     FormsModule,
+    LayoutModule,
   ],
-  providers: [ShareService],
+  providers: [ShareService,
+    {
+    provide: APP_INITIALIZER,
+    useFactory: appInitializerFactory,
+    multi: true,
+    deps: [TranslateService],
+  },],
   bootstrap: [AppComponent]
 })
 export class AppModule {
+  constructor() {
+  }
 }

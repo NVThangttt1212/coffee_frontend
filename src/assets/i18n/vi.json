@@ -1,5 +1,64 @@
 {
-  "test": "Đồ án tốt nghiệp",
+  "global": {
+    "nodata": "Không Có Dữ Liệu",
+    "totals": "Tổng",
+    "all": "Tất cả",
+    "Selected": "Đã chọn",
+    "search": "Tìm kiếm",
+    "delete": "Xóa",
+    "cancel": "Trở lại",
+    "apply": "Chọn",
+    "lang": "VN",
+    "idUser" : "MNV: ",
+    "email" : "Email",
+    "position": "Chức vụ",
+    "login": "Đăng Nhập",
+    "logout": "Đăng Xuất",
+    "username": "Nhập Tài Khoản",
+    "password": "Nhập Mật Khẩu",
+    "vldusername": "Vui lòng nhập tài khoản !",
+    "vldpassword": "Vui lòng nhập mật khẩu !"
+  },
+
+  "manage": {
+    "totalRevenue": "Tổng Doanh Thu",
+    "addAccount": "Thêm Tài Khoản",
+    "placeholderCoffee": "Tìm ID Cà Phê, Tên Món",
+    "placeholderCake": "Tìm ID Bánh, Tên Món ",
+    "placeholderOrder": "Tìm Mã Đơn, Số Bàn",
+    "placeholderRevenue": "Tìm Mã Đơn, Số Bàn",
+    "placeholderSnacks": "Tìm Mã Đồ Ăn Thêm, Tên Món",
+    "placeholderAccount": "Tìm ID Tài Khoản, Tên Tài Khoản ",
+    "action": "Thao tác",
+    "coffee": "Cà Phê",
+    "snacks": "Đồ Ăn Vặt",
+    "order": "Đơn Hàng",
+    "cake": "Bánh Ngọt",
+    "revenue": "Doanh Thu",
+    "product": "Sản Phẩm",
+    "account": "Tài Khoản",
+    "orders": {
+      "totals": "Số Tiền",
+      "edit": "Thay Đổi",
+      "changeStatus": "Thay Đổi Trạng Thái",
+      "cancel": "Huỷ",
+      "actionCancel": "Hủy Đơn Hàng",
+      "cancelOrder": "Đơn Hàng Bị Hủy",
+      "deleteOrders": "Xóa Đơn Hàng",
+      "id": "mã đơn hàng",
+      "table": "bàn",
+      "products": "sản phẩm",
+      "orderTime": "thời gian đặt hàng",
+      "status": "xác nhận",
+      "delete": "Xóa",
+      "paid": "Đã Thanh Toán ",
+      "unpaid": "Chưa Thanh Toán"
+    },
+    "revenues": {
+      "customer_name": "Tên Khách Hàng"
+    }
+  },
+
   "header": {
 
   },

@@ -2,19 +2,26 @@
   <section style="display: flex;height: 50px; border-radius: 12px;margin-bottom: 10px;padding: 0 20px; justify-content: space-between; background-color:#fff; align-items: center;">
     <div class="note__details">
       <span style="font-weight: bold; color: #007bff;">{{'global.totals' | translate}}: {{totals}}</span>
-      <span style="font-weight: bold; color: #007bff;">{{'global.Selected'| translate}}: {{selectedAll ? ('global.all'| translate): totalSelect}}</span>
-      <span style="font-weight: bold; color: #931a0e" *ngIf="revenue"> Tổng Doanh Thu: <span style="font-size: 16px ">{{totalRevenue | currency: 'VND'}}</span> </span>
+      <span *ngIf="products" style="font-weight: bold; color: #007bff;">{{titlePageProduct}}</span>
+      <span *ng="!products" style="font-weight: bold; color: #007bff;">{{'global.Selected'| translate}}: {{selectedAll ? ('global.all'| translate): totalSelect}}</span>
+      <span style="font-weight: bold; color: #931a0e" *ngIf="revenue"> {{'manage.revenues.totalRevenue' | translate}}: <span style="font-size: 16px ">{{totalRevenue | currency: 'VND'}}</span> </span>
     </div>
-
-
     <div style="display: flex; align-items: center">
+      <button style="background-color: #007bff;color: #fff; margin-right: 20px" *ngIf="products" (click)="createProduct()" mat-button>{{'manage.manageProduct.createProduct' | translate}}</button>
+      <button style="background-color: #5e1f18" *ngIf="products" class="action" mat-button [matMenuTriggerFor]="menuCategory">{{'manage.category' | translate}}</button>
+      <mat-menu #menuCategory="matMenu" class="menuAction">
+        <button [ngClass]="{'active': titlePageProduct === 'coffee'}" mat-menu-item (click)="getProduct('coffee')">{{'manage.coffee'| translate}}</button>
+        <button [ngClass]="{'active': titlePageProduct === 'cakes'}" mat-menu-item (click)="getProduct('cakes')">{{'manage.cake'| translate}}</button>
+        <button [ngClass]="{'active': titlePageProduct === 'snacks'}" mat-menu-item (click)="getProduct('snacks')">{{'manage.snacks'| translate}}</button>
+      </mat-menu>
+
       <button *ngIf="selectedItems.length >= 1" class="action" mat-button [matMenuTriggerFor]="menu">{{'manage.action' | translate}}</button>
       <mat-menu #menu="matMenu" class="menuAction">
         <button *ngIf="localStorage.getItem('position') === 'manager'" mat-menu-item (click)="deleteCol()">{{'manage.orders.delete'| translate}}</button>
         <button *ngIf="order" mat-menu-item (click)="changStatus()">{{'manage.orders.changeStatus'| translate}}</button>
       </mat-menu>
       <button (click)="refresh()" mat-button style="float: right; background-color: #d7d7db;"><i class="fas fa-sync-alt"></i></button>
-      <nav style="margin-left: 20px">
+      <nav *ngIf="!products" style="margin-left: 20px">
         <ul style="margin: 0" class="pagination">
           <li class="page-item" (click)="prevPage()" [class.disabled]="currentPage === 1">
             <button class="page-link" aria-label="Previous">
@@ -33,12 +40,12 @@
       </nav>
     </div>
   </section>
-<table class="table" *ngIf="rowData && rowData.length > 0">
+  <table class="table" *ngIf="!products && rowData && rowData.length > 0">
     <thead>
     <tr>
       <th style="padding: 0 0 4px 0"><mat-checkbox  [(ngModel)]="selectedAll" (change)="selectAll()"></mat-checkbox></th>
       <th>{{'manage.orders.id'| translate}}</th>
-      <th>{{'manage.orders.table'| translate}}</th>
+      <th>{{'manage.orders.tables'| translate}}</th>
       <th>{{'manage.orders.orderTime'| translate}}</th>
       <th *ngIf="revenue">{{'manage.revenues.customer_name' | translate }}</th>
       <th>{{'manage.orders.products'| translate}}</th>
@@ -78,6 +85,37 @@
     </tr>
     </tbody>
   </table>
+  <section class="products__list" *ngIf="products && !noData">
+    <div class="products__item" *ngFor="let col of rowData">
+      <div class="products__item--img">
+        <img class="card-img-top" src="{{col.image_url}}" alt="Card image cap">
+      </div>
+      <div class="card-body">
+        <div style="display: flex; justify-content: space-between; align-items: center">
+          <h5 class="card-title">{{col.name}}</h5>
+          <button class="outStock" (click)="bookmark(col)">
+            <i *ngIf="col.InStock === '1'" class="fas fa-bookmark"></i>
+            <i *ngIf="col.InStock === '0'" class="far fa-bookmark"></i>
+          </button>
+        </div>
+        <p class="price"><span>Giá: </span>{{col.price | currency: 'VND'}}</p>
+        <p class="products__item--description price"><Span>Description: </Span>{{col.description}}</p>
+        <div class="list__btn">
+          <a class="btn btn-primary" target="_blank" style="background-color: #007bff; color: #fff" (click)="detailProdcut(col.product_id)">Detail</a>
+          <div style="display: flex; align-items: center">
+            <button style="margin-right: 10px" (click)="deleteProduct(col)">
+              <i class="fas fa-trash-alt"></i>
+            </button>
+            <button (click)="changeProduct(col)">
+              <i class="far fa-edit"></i>
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="loading" *ngIf="loading" style="margin-top: 18%">
     <mat-spinner></mat-spinner>
   </section>

@@ -1,5 +1,7 @@
 {
   "global": {
+    "comment": "Comment",
+    "required" : "Do not abandon this field",
     "nodata": "No Data",
     "totals": "Totals",
     "all": "All",
@@ -20,6 +22,9 @@
     "vldpassword": "Please enter a password !"
   },
   "manage": {
+    "missingImg": "Please Select Photo",
+    "changeProduct": "Edit Product",
+    "category":"Category",
     "totalRevenue": "Total Revenue",
     "addAccount": "Add Account",
     "placeholderCoffee": "Search ID Coffee, Name Coffee",
@@ -28,14 +33,26 @@
     "placeholderSnacks": "Search ID Snacks , Name Snacks",
     "placeholderRevenue": "Search ID Order, ID table",
     "placeholderAccount": "Search ID Account, Name Account",
+    "placeholderProduct": "Search ID Product, Name Product",
     "action": "Action",
     "coffee": "coffee",
     "snacks": "snacks",
     "order": "order",
     "cake": "cake",
     "revenue": "revenue",
+    "users": "users",
+    "products": "Products",
+    "tables": "table",
     "product": "product",
     "account": "account",
+    "manageProduct":{
+      "description": "Description",
+      "price": "Price",
+      "idProduct":"ID Product",
+      "nameProduct": "Name Product",
+      "deleteProduct": "Delete Product",
+      "createProduct": "Create Product"
+    },
     "orders": {
       "totals": "Amount",
       "edit": "Edit",
@@ -45,6 +62,7 @@
       "deleteOrders": "Delete Orders",
       "id": "ID Orders",
       "table": "table",
+      "tables": "table",
       "products": "products",
       "orderTime": "Time order",
       "status": "confirm",
@@ -54,6 +72,7 @@
 
     },
     "revenues": {
+      "totalRevenue": "Total Revenue",
       "customer_name": "Customer Name"
     }
   },

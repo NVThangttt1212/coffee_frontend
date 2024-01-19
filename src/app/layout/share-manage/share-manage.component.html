@@ -5,11 +5,11 @@
         <img src="./assets/img/logo.png" alt="logo">
       </div>
       <button [routerLinkActive]="['active']" [routerLink]="['/manage/']" [routerLinkActiveOptions]="{ exact: true }"> {{'manage.order' | translate}}</button>
-      <button routerLinkActive="active" routerLink="/manage/coffee"> {{'manage.coffee' | translate}}</button>
-      <button routerLinkActive="active" routerLink="/manage/cake"> {{'manage.cake' | translate}}</button>
-      <button routerLinkActive="active" routerLink="/manage/snacks"> {{'manage.snacks' | translate}}</button>
+      <button routerLinkActive="active" routerLink="/manage/products">{{'manage.products' | translate}}</button>
       <button routerLinkActive="active" routerLink="/manage/revenue">{{'manage.revenue' | translate}}</button>
       <button routerLinkActive="active" routerLink="/manage/account">{{'manage.account' | translate}}</button>
+      <button routerLinkActive="active" routerLink="/manage/users">{{'manage.users' | translate}}</button>
+      <button routerLinkActive="active" routerLink="/manage/table">{{'manage.tables' | translate}}</button>
     </div>
   </mat-drawer>
   <div class="example-sidenav-content">
@@ -79,11 +79,9 @@
                    (ngModelChange)="onSearchChange($event)"
                    placeholder="{{
                    order ? ('manage.placeholderOrder' | translate) :
-                   cake ? ('manage.placeholderCake' | translate) :
-                   coffee ? ('manage.placeholderCoffee' | translate) :
-                   snacks ? ('manage.placeholderSnacks' | translate) :
                    revenue ? ('manage.placeholderRevenue' | translate) :
                    account ? ('manage.placeholderAccount' | translate) :
+                   products ? ('manage.placeholderProduct' | translate):
                    ''}}"
                    (keypress)="onKeyPress($event)"
             >
@@ -114,19 +112,21 @@
 
       </div>
       <section class="table">
-        <app-table *ngIf="order || revenue || account"
+        <app-table *ngIf="order || products ||  revenue || account || users "
+
           [columns]="columns"
           [rowData]="rowData"
                    (updateRow)="updateRowShare($event)"
+                   (categoryProduct)="categoryProductShare($event)"
                    [loading] = "loading"
                    [noData] = "noData"
                    [order] = "order"
-                   [cake] = "cake"
-                   [coffee] = "coffee"
-                   [snacks]="snacks"
+                   [products] = "products"
                    [revenue]="revenue"
                    [account]="account"
                    [totalRevenue]="totalRevenue"
+                   [users]="users"
+                   [table]="table"
 
         >
         </app-table>

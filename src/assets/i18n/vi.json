@@ -1,5 +1,7 @@
 {
   "global": {
+    "comment": "Bình luận",
+    "required" : "không được bỏ chống trường này",
     "nodata": "Không Có Dữ Liệu",
     "totals": "Tổng",
     "all": "Tất cả",
@@ -21,6 +23,9 @@
   },
 
   "manage": {
+    "missingImg": "Vui Lòng Chọn Ảnh",
+    "changeProduct": "Thay Đổi",
+    "category":"Loại",
     "totalRevenue": "Tổng Doanh Thu",
     "addAccount": "Thêm Tài Khoản",
     "placeholderCoffee": "Tìm ID Cà Phê, Tên Món",
@@ -29,14 +34,27 @@
     "placeholderRevenue": "Tìm Mã Đơn, Số Bàn",
     "placeholderSnacks": "Tìm Mã Đồ Ăn Thêm, Tên Món",
     "placeholderAccount": "Tìm ID Tài Khoản, Tên Tài Khoản ",
+    "placeholderProduct": "Tìm ID Sản Phẩm, Tên Sản Phẩm",
     "action": "Thao tác",
     "coffee": "Cà Phê",
     "snacks": "Đồ Ăn Vặt",
     "order": "Đơn Hàng",
     "cake": "Bánh Ngọt",
+    "users": "Nhân viên",
+    "tables": "Bàn",
+    "products": "Sản Phẩm",
     "revenue": "Doanh Thu",
     "product": "Sản Phẩm",
     "account": "Tài Khoản",
+    "manageProduct":{
+      "description": "Mô tả",
+      "price": "Giá",
+      "idProduct":"Mã Sản Phẩm",
+      "nameProduct": "Tên Sản Phẩm",
+      "deleteProduct": "Xóa Sản Phẩm",
+      "createProduct": "Thêm Sản Phẩm"
+
+    },
     "orders": {
       "totals": "Số Tiền",
       "edit": "Thay Đổi",
@@ -47,6 +65,7 @@
       "deleteOrders": "Xóa Đơn Hàng",
       "id": "mã đơn hàng",
       "table": "bàn",
+      "tables": "bàn",
       "products": "sản phẩm",
       "orderTime": "thời gian đặt hàng",
       "status": "xác nhận",
@@ -55,6 +74,7 @@
       "unpaid": "Chưa Thanh Toán"
     },
     "revenues": {
+      "totalRevenue": "Tổng Doanh Thu",
       "customer_name": "Tên Khách Hàng"
     }
   },

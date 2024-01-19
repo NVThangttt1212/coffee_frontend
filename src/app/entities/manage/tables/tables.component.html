@@ -1,0 +1,9 @@
+<app-share-manage
+  [table]="true"
+  [rowData]="dataTale"
+  [loading]="loading"
+  [noData]="noData"
+  (searchValue)="onSearch($event)"
+  (updateRow)="updateRow($event)"
+></app-share-manage>
+

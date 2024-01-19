@@ -18,7 +18,7 @@ import {Router} from "@angular/router";
   styleUrl: './share-manage.component.scss'
 })
 
-export class ShareManageComponent implements OnInit{
+export class ShareManageComponent implements OnInit, OnChanges{
   public subscription: Subscription = new Subscription();
   @ViewChild('drawer') drawer?: MatDrawer;
   @Input() columns: any;
@@ -26,14 +26,17 @@ export class ShareManageComponent implements OnInit{
   @Input() rowData: any;
   @Input() loading = false;
   @Input() noData = false;
-  @Input() cake = false;
   @Input() revenue = false;
-  @Input() coffee = false;
-  @Input() snacks = false;
+  @Input() products = false;
   @Input() order = false;
+  @Input() users = false;
+  @Input() table = false;
   @Input() account = false;
+  @Input() clearSearchProduct = false;
   @Output() clearValueSearch = new EventEmitter<any>();
   @Output() updateRow: EventEmitter<any> = new EventEmitter<any>();
+  @Output() categoryProduct: EventEmitter<any> = new EventEmitter<any>();
+
   @Output() searchValue = new EventEmitter<any>();
   time_gte: Date | null = null;
   time_lte: Date | null = null;
@@ -60,17 +63,34 @@ export class ShareManageComponent implements OnInit{
     this.subscription.add(
     )
   }
+  ngOnChanges(changes: SimpleChanges) {
+    if(this.clearSearchProduct){
+      this.search = ''
+    }
+  }
 
   updateRowShare(event: any): void {
     this.updateRow.emit(event);
   }
+
+  categoryProductShare(event: any): void{
+    this.categoryProduct.emit(event)
+  }
   onSearch(): void {
-    this.searchValue.emit(
-      {
-      time_gte: this.time_from,
-      time_lte: this.time_to,
-      searchValue: this.search
-    })
+    if(this.order || this.revenue){
+      this.searchValue.emit(
+        {
+          time_gte: this.time_from,
+          time_lte: this.time_to,
+          searchValue: this.search
+        })
+    }else if(this.products){
+      this.searchValue.emit(
+        {
+          searchValue: this.search
+        })
+    }
+
   }
 
   submitDateTime(): void {
@@ -159,6 +179,7 @@ export class ShareManageComponent implements OnInit{
         searchValue: ""
       }
     )
+    this.clearValueSearch.emit(true)
   }
 
   toggle(): void{

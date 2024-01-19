@@ -10,8 +10,8 @@ import {OrderService} from "../order.service";
 export class OrderDetailComponent implements OnInit{
   constructor(private route: ActivatedRoute,
               private orderService: OrderService) {
-
   }
+
   ngOnInit() {
     this.route.params.subscribe(params => {
       const id = params['id'];

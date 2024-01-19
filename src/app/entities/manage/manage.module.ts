@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ManageRoutingModule } from './manage-routing.module';
-import {CakeComponent} from "./cake/cake.component";
-import {CoffeeComponent} from "./coffee/coffee.component";
 import {OrderComponent} from "./order/order.component";
 import {TranslateModule} from "@ngx-translate/core";
 import {ShareManageComponent} from "../../layout/share-manage/share-manage.component";
@@ -25,41 +23,53 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import {EditPaidComponent} from "./order/edit-paid/edit-paid.component";
 import {MatRadioModule} from "@angular/material/radio";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
-import {SnacksComponent} from "./snacks/snacks.component";
 import {OrderDetailComponent} from "./order/order-detail/order-detail.component";
+import {UsersComponent} from "./users/users.component";
+import {TablesComponent} from "./tables/tables.component";
+import {ProductsComponent} from "./products/products.component";
+import {CreatProductComponent} from "./products/creat-product/creat-product.component";
+import {DeteleDialogProductComponent} from "./products/detele-dialog-product/detele-dialog-product.component";
+import {MatSelectModule} from "@angular/material/select";
+import {ProductDetailComponent} from "./products/product-detail/product-detail.component";
 
 @NgModule({
   declarations: [
-    CakeComponent,
     EditPaidComponent,
     OrderDetailComponent,
-    CoffeeComponent,
     OrderComponent,
     RevenueComponent,
     ShareManageComponent,
-    SnacksComponent,
     TableComponent,
-    AccountComponent
+    AccountComponent,
+    UsersComponent,
+    TablesComponent,
+    ProductsComponent,
+    CreatProductComponent,
+    DeteleDialogProductComponent,
+    ProductDetailComponent
+
   ],
-    imports: [
-        CommonModule,
-        ManageRoutingModule,
-        TranslateModule,
-        MatSidenavModule,
-        LayoutModule,
-        ReactiveFormsModule,
-        MatButtonModule,
-        MatFormFieldModule,
-        MatInputModule,
-        FormsModule,
-        MatMenuModule,
-        MatDatepickerModule,
-        MatTableModule,
-        MatPaginatorModule,
-        MatSortModule,
-        MatCheckboxModule,
-        MatRadioModule,
-        MatProgressSpinnerModule
-    ]
+  imports: [
+    CommonModule,
+    ManageRoutingModule,
+    TranslateModule,
+    MatSidenavModule,
+    LayoutModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    MatMenuModule,
+    MatDatepickerModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatCheckboxModule,
+    MatRadioModule,
+    MatProgressSpinnerModule,
+    MatSelectModule
+
+  ]
 })
 export class ManageModule { }

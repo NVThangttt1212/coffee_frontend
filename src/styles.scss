@@ -109,4 +109,22 @@ body { margin: 0;
   .mat-mdc-progress-spinner .mdc-circular-progress__determinate-circle, .mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-circle-graphic{
     stroke: #007bff!important;
   }
+
+  .active{
+    background-color: #931a0e !important;
+    color: #fff !important;
+  }
+  .mat-mdc-text-field-wrapper{
+    width: 100%;
+  }
+  .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix{
+    padding-left: 10px;
+    padding-right: 10px;
+
+  }
+  .mat-mdc-text-field-wrapper:not(.mdc-text-field--outlined) .mat-mdc-form-field-infix{
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
 }

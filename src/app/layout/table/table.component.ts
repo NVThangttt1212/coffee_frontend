@@ -6,7 +6,6 @@ import {MatDialog} from "@angular/material/dialog";
 
 import {Router} from "@angular/router";
 
-
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
@@ -15,6 +14,8 @@ import {Router} from "@angular/router";
 export class TableComponent implements OnInit ,OnChanges, OnDestroy{
   private subscriptions = new Subscription();
   @Output() updateRow: EventEmitter<any> = new EventEmitter<any>();
+  @Output() categoryProduct: EventEmitter<any> = new EventEmitter<any>();
+
 
   @Input() columns: any;
   @Input() totalRevenue?: number
@@ -22,22 +23,27 @@ export class TableComponent implements OnInit ,OnChanges, OnDestroy{
   @Input() loading = false;
   @Input() noData = false;
   @Input() order = false;
-  @Input() cake = false;
-  @Input() coffee = false;
-  @Input() snacks = false;
   @Input() revenue = false;
+  @Input() products = false;
   @Input() account = false;
+  @Input() users = false;
+  @Input() table = false;
+  titlePageProduct = ''
   totals: number = 0;
   pageSize: number = 10;
   currentPage: number = 1;
   selectedItems: any[] = [];
   totalSelect: number = 0;
   selectedAll = false;
+  selectedAllProduct = false;
+  checkAll = false;
+  selectProductList :any[] = []
   constructor(private shareService: ShareService,
               private route: Router) {
   }
 
   ngOnInit(): void {
+    this.titlePageProduct = 'coffee'
     this.subscriptions.add(
       this.shareService.refresh$.subscribe(() => {
         this.refresh();
@@ -89,6 +95,47 @@ export class TableComponent implements OnInit ,OnChanges, OnDestroy{
       error:  !allItemsArePaid && !allItemsAreUnPaid,
     })
   }
+
+  bookmark(data: any): void{
+    this.updateRow.emit({
+      category: data.category,
+      mark: data.InStock === "1" ? false : true,
+      id: data.product_id,
+      type: 1
+    })
+  }
+
+  deleteProduct(data: any): void{
+    this.updateRow.emit({
+      category: data.category,
+      id: data.product_id,
+      type: 2
+    })
+  }
+
+  createProduct(): void{
+    this.updateRow.emit({
+      type: 4
+    })
+  }
+
+  detailProdcut(id: string): void{
+    const url = `/manage/productDetail/${id}`;
+    window.open(url, '_blank');
+  }
+
+  changeProduct(data: any): void{
+    this.updateRow.emit({
+      type: 3,
+      data: data
+    })
+  }
+
+  getProduct(data: string): void{
+    this.titlePageProduct = data
+    this.categoryProduct.emit(data)
+  }
+
 
   changStatusTable(event: any) : void {
     this.updateRow.emit({
@@ -147,19 +194,27 @@ export class TableComponent implements OnInit ,OnChanges, OnDestroy{
     this.updateSelectAllStatus();
     if (!this.isAllItemsSelected()) {
       this.selectedAll = false;
+
     }
+    console.log(this.selectedItems)
+
   }
   isAllItemsSelected(): boolean {
     return this.selectedItems.length === this.rowData.length;
   }
 
   selectAll(): void {
-    this.selectedAll === this.selectedAll
+    this.selectedAll === !this.selectedAll
     if(this.selectedAll){
       this.selectedItems = [...this.rowData];
     }else {
       this.selectedItems = []
     }
+    if(this.selectedItems.length === 0){
+      this.totalSelect = 0
+    }
+    this.totalSelect = this.selectedItems.length
+    console.log(this.selectedItems)
   }
   isItemSelected(item: any): boolean {
     return this.selectedItems.some((selectedItem) => selectedItem.order_id === item.order_id);
@@ -170,7 +225,5 @@ export class TableComponent implements OnInit ,OnChanges, OnDestroy{
   updateSelectAllStatus(): void {
     this.selectedAll = this.selectedItems.length === this.rowData.length;
   }
-
-
   protected readonly localStorage = localStorage;
 }

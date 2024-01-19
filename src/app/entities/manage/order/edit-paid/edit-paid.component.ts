@@ -22,7 +22,6 @@ export class EditPaidComponent implements OnInit{
     private orderService: OrderService,
   ) {
     this.currenValue = this.data.isPaid ? 'isPaid' : 'isUnPaid';
-
     this.checkboxForm = this.fb.group({
       option: this.currenValue
     });

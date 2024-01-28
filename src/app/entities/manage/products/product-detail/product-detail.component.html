@@ -23,7 +23,7 @@
         <h2><span style="color: #5e1f18">{{'manage.category' | translate}}</span>: {{dataDetail.category}}</h2>
         <h2><span  style="color: #5e1f18">{{'manage.manageProduct.price' | translate}}: </span>{{dataDetail.price | currency: 'VND'}}</h2>
         <h2>{{'manage.manageProduct.description' | translate}}:</h2>
-        <p style="padding: 10px">{{dataDetail.description}}</p>
+        <p >{{dataDetail.description}}</p>
       </div>
 
     </section>
@@ -41,17 +41,24 @@
     </div>
     <section class="commnet__content">
       <div class="itemcomment" *ngFor="let item of commentList">
-        <div class="user">
-          <i class="fas fa-user"></i>
+        <div class="comment__left">
+          <div class="user">
+            <i class="fas fa-user"></i>
+          </div>
+          <div class="itemcomment__content">
+            <section class="time__comment">
+              {{item.timestamp}}
+            </section>
+            <section>
+              <p style="margin: 0">{{item.content}}</p>
+            </section>
+          </div>
         </div>
-        <div class="itemcomment__content">
-          <section class="time__comment">
-            {{item.timestamp}}
-          </section>
-          <section>
-            <p>{{item.content}}</p>
-          </section>
 
+        <div *ngIf="localStorage.getItem('position') === 'manager'">
+          <button class="deletecomment" style="margin-right: 10px" (click)="deleteComment(item)">
+            <i class="fas fa-trash-alt"></i>
+          </button>
         </div>
       </div>
 

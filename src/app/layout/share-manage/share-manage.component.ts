@@ -36,7 +36,7 @@ export class ShareManageComponent implements OnInit, OnChanges{
   @Output() clearValueSearch = new EventEmitter<any>();
   @Output() updateRow: EventEmitter<any> = new EventEmitter<any>();
   @Output() categoryProduct: EventEmitter<any> = new EventEmitter<any>();
-
+  @Output() addAccount: EventEmitter<boolean> = new EventEmitter<boolean>()
   @Output() searchValue = new EventEmitter<any>();
   time_gte: Date | null = null;
   time_lte: Date | null = null;
@@ -195,6 +195,10 @@ export class ShareManageComponent implements OnInit, OnChanges{
     this.currentLanguage = this.currentLanguage === 'en' ? 'vi' : 'en';
     this.translateService.use(this.currentLanguage);
     localStorage.setItem('lang', this.currentLanguage);
+  }
+
+  createAccount(): void{
+    this.addAccount.emit(true)
   }
 
   protected readonly localStorage = localStorage;

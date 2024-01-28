@@ -31,6 +31,8 @@ import {CreatProductComponent} from "./products/creat-product/creat-product.comp
 import {DeteleDialogProductComponent} from "./products/detele-dialog-product/detele-dialog-product.component";
 import {MatSelectModule} from "@angular/material/select";
 import {ProductDetailComponent} from "./products/product-detail/product-detail.component";
+import {AddAccountComponent} from "./account/add-account/add-account.component";
+import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   declarations: [
@@ -46,7 +48,8 @@ import {ProductDetailComponent} from "./products/product-detail/product-detail.c
     ProductsComponent,
     CreatProductComponent,
     DeteleDialogProductComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    AddAccountComponent,
 
   ],
   imports: [
@@ -68,7 +71,8 @@ import {ProductDetailComponent} from "./products/product-detail/product-detail.c
     MatCheckboxModule,
     MatRadioModule,
     MatProgressSpinnerModule,
-    MatSelectModule
+    MatSelectModule,
+    MatIconModule
 
   ]
 })

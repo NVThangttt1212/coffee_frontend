@@ -18,6 +18,7 @@
     "logout": "Sign Out",
     "username": "User Name",
     "password": "Pass Word",
+    "confirmPassword": "Confirm Password",
     "vldusername": "Please enter account !",
     "vldpassword": "Please enter a password !"
   },
@@ -46,6 +47,7 @@
     "product": "product",
     "account": "account",
     "manageProduct":{
+      "changeDes": "Description... ",
       "description": "Description",
       "price": "Price",
       "idProduct":"ID Product",

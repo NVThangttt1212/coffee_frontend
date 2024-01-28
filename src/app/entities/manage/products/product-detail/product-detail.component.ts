@@ -3,6 +3,9 @@ import {ActivatedRoute} from "@angular/router";
 import {ProductsService} from "../products.service";
 import {TranslateService} from "@ngx-translate/core";
 import {FormBuilder, FormGroup} from "@angular/forms";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {CreatProductComponent} from "../creat-product/creat-product.component";
+import {DeteleDialogProductComponent} from "../detele-dialog-product/detele-dialog-product.component"
 interface Comment {
   comment_id: string;
   product_id: string;
@@ -26,9 +29,16 @@ export class ProductDetailComponent implements OnInit{
               private fb: FormBuilder,
               private productService: ProductsService,
               private translateService: TranslateService,
+              private dialog: MatDialog,
               ) {
   }
   ngOnInit() {
+    this.getDetail()
+    this.formComment = this.fb.group({
+      commentValue: ['']
+    })
+  }
+  getDetail(): void{
     this.route.params.subscribe(params => {
       const id = params['id'];
       const res = {
@@ -37,7 +47,6 @@ export class ProductDetailComponent implements OnInit{
       this.productService.getDetailId(res).subscribe(
         res=>{
           this.dataDetail = res.product[0]
-
           this.commentList = res.comments
           this.commentList.sort((a, b) => {
             const timestampA = new Date(a.timestamp).getTime();
@@ -50,10 +59,6 @@ export class ProductDetailComponent implements OnInit{
         }
       )
     });
-    this.formComment = this.fb.group({
-      commentValue: ['']
-    })
-
 
   }
 
@@ -73,12 +78,58 @@ export class ProductDetailComponent implements OnInit{
   }
 
   changeProduct():void{
+    const data = {
+      type: 3,
+      data: this.dataDetail
+    }
+    const dialog4: MatDialogRef<CreatProductComponent> = this.dialog.open(CreatProductComponent, {
+      width: '1000px',
+      height:'580px',
+      data: data
+    });
+    dialog4.afterClosed().subscribe( ()=> {
+      this.getDetail()
+    })
+  }
+
+  comment(): void {
+    const currentTime = new Date();
+    console.log(currentTime)
+    const res = {
+      product_id: this.dataDetail.product_id,
+      content: this.formComment.value.commentValue,
+      timestamp: currentTime
+    };
+
+    this.productService.comment(res).subscribe(
+      (req) => {
+        console.log(req);
+        this.getDetail();
+        this.commentValue = ''
+
+      },
+      (error) => {
+        console.error('Comment error:', error);
+      }
+    );
+  }
+
+  deleteComment(data: any): void{
+    const res = {
+     id: data.comment_id,
+      detailProduct: true
+    }
+    const dialog4: MatDialogRef<DeteleDialogProductComponent> = this.dialog.open(DeteleDialogProductComponent, {
+      width: '300px',
+      height:'160px',
+      data: res
+    });
+    dialog4.afterClosed().subscribe( ()=> {
+      this.getDetail()
+    })
 
   }
 
-  comment(): void{
-    console.log(this.formComment.value)
-  }
 
   handleLang(): void{
     this.currentLanguage = this.currentLanguage === 'en' ? 'vi' : 'en';
@@ -89,7 +140,6 @@ export class ProductDetailComponent implements OnInit{
   @HostListener('window:scroll', [])
   onWindowScroll() {
     const scrollY = window.scrollY || document.documentElement.scrollTop;
-
     this.showScrollButton = scrollY > 100;
   }
 
@@ -98,4 +148,5 @@ export class ProductDetailComponent implements OnInit{
   }
 
   protected readonly decodeURI = decodeURI;
+  protected readonly localStorage = localStorage;
 }

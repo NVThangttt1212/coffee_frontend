@@ -15,6 +15,7 @@ export class DeteleDialogProductComponent implements OnInit{
   ) {}
 
   ngOnInit() {
+    console.log(this.data)
   }
 
   closeDialog(): void{
@@ -22,14 +23,30 @@ export class DeteleDialogProductComponent implements OnInit{
   }
 
   delete(data: any): void{
-    this.productService.deleteProduct(data).subscribe(
-      res =>{
-        this.closeDialog()
-      },
-      error =>{
-        console.log('lỗi delete')
+    if(this.data.detailProduct){
+      const res = {
+        id: this.data.id
       }
-    )
+      this.productService.deleteComment(res).subscribe(
+        res =>{
+          this.closeDialog()
+        },
+        error =>{
+          console.log('lỗi delete')
+        }
+      )
+
+    }else {
+      this.productService.deleteProduct(data).subscribe(
+        res =>{
+          this.closeDialog()
+        },
+        error =>{
+          console.log('lỗi delete')
+        }
+      )
+    }
+
 
   }
 

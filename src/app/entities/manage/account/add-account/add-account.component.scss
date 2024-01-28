@@ -1,0 +1,21 @@
+.createAccount{
+  padding: 30px;
+  .header{
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .content{
+    text-align: center;
+    margin-top: 40px;
+    .addForm{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .row-control{
+        margin-bottom: 40px;
+        width: 400px;
+      }
+    }
+  }
+}

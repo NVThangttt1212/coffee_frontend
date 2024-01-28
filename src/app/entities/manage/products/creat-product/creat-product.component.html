@@ -64,9 +64,9 @@
             </mat-error>
         </div>
         <div class="row-control">
-          <mat-form-field class="example-full-width"  [class.create]="data.type === 4">
-            <mat-label>description</mat-label>
-            <input matInput placeholder="nhập mô tả..." formControlName="description" />
+          <mat-form-field class="example-full-width" [ngStyle]="{'height': data.type === 3 ? '234px': '170px'}">
+            <mat-label>{{'manage.manageProduct.changeDes' | translate}}</mat-label>
+            <textarea style="height: 200px" formControlName="description" matInput placeholder="{{'manage.manageProduct.changeDes' | translate}}"></textarea>
           </mat-form-field>
         </div>
       </form>

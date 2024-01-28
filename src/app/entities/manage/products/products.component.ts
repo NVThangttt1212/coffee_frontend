@@ -77,7 +77,6 @@ export class ProductsComponent implements OnInit{
           this.noData = true
         }
         this.loading = false
-
       },
       error =>{
         this.loading = false
@@ -160,6 +159,7 @@ export class ProductsComponent implements OnInit{
           height:'580px',
           data: data
         });
+        console.log('CreatProductComponent type3',data)
         dialogRef.afterClosed().subscribe( ()=> {
           this.categoryProduct(data.data.category)
         })

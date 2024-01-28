@@ -1,0 +1,44 @@
+<div class="createAccount">
+
+  <section class="header">
+    <h1 style="font-weight: bold; color: #5e1f18">Create Account</h1>
+    <div class="closeCreateAccount">
+      <button class="close" (click)="close()"><i class="fas fa-times"></i></button>
+    </div>
+  </section>
+  <section class="content">
+    <form class="addForm" [formGroup]="createAccountForm" (ngSubmit)="submit()">
+      <div class="row-control">
+        <mat-form-field appearance="outline" style="width: 360px; height: 50px">
+          <mat-label>Usser Name</mat-label>
+          <input matInput placeholder="Usser Name..." formControlName="username" />
+          <mat-error style="color: #931a0e" *ngIf="createAccountForm.get('username')?.hasError('pattern') && createAccountForm.get('password')?.touched">
+            {{'global.required' | translate}}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="row-control">
+        <mat-form-field appearance="outline" style="width: 360px; height: 50px">
+          <mat-label>Password</mat-label>
+          <input matInput placeholder="Password..." formControlName="password" />
+          <mat-error style="color: #931a0e" *ngIf="createAccountForm.get('password')?.hasError('pattern') && createAccountForm.get('confirmPassword')?.touched">
+            {{'global.required' | translate}}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="row-control">
+        <mat-form-field appearance="outline" style="width: 360px; height: 50px">
+          <mat-label>Confirm Password</mat-label>
+          <input matInput placeholder="Confirm Password..." formControlName="confirmPassword" />
+          <mat-error style="color: #931a0e" *ngIf="createAccountForm.get('confirmPassword')?.hasError('pattern') && createAccountForm.get('confirmPassword')?.touched">
+            {{'global.required' | translate}}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <button mat-button type="submit">Submit</button>
+    </form>
+    <button class="changeLang" (click)="handleLang()">
+      {{this.currentLanguage === 'vi' ? 'vi' : 'en'}}
+    </button>
+  </section>
+</div>

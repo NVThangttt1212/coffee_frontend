@@ -15,6 +15,8 @@ export class ProductsService {
   private create = 'http://localhost/coffee_backend/manage/models/products/createProduct.php'
   private search = 'http://localhost/coffee_backend/manage/models/products/searchProduct.php'
   private detailProduct = 'http://localhost/coffee_backend/manage/models/products/getDetailProduct.php'
+  private comments = 'http://localhost/coffee_backend/manage/models/products/commentProduct.php'
+  private deleteComments = 'http://localhost/coffee_backend/manage/models/products/deleteCommentProduct.php'
   constructor(private http: HttpClient) { }
 
   searchProduct(data: any): Observable<any>{
@@ -42,8 +44,15 @@ export class ProductsService {
     return this.http.post(this.create, data)
   }
 
-  getDetailId(id: any): Observable<any>
-  {
+  getDetailId(id: any): Observable<any> {
     return this.http.post(this.detailProduct , id)
+  }
+
+  comment(res: any): Observable<any>{
+    return this.http.post(this.comments, res)
+  }
+
+  deleteComment(res: any): Observable<any>{
+    return this.http.post(this.deleteComments, res)
   }
 }

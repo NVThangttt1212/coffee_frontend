@@ -11,8 +11,8 @@ import {ProductsService} from "../products.service";
   templateUrl: './creat-product.component.html',
   styleUrl: './creat-product.component.scss'
 })
-export class CreatProductComponent implements OnInit{
 
+export class CreatProductComponent implements OnInit{
   product: any
   fileToUpload: any;
   imageUrl: any;
@@ -29,6 +29,7 @@ export class CreatProductComponent implements OnInit{
   ) {
   }
   ngOnInit(): void {
+    console.log(this.data)
     this.product = this.data.type === 3 ? this.data.data : this.data
     this.imageUrl = this.data.type === 3 ?  this.product.image_url : ''
     this.form = this.fb.group({
